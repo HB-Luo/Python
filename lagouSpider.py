@@ -4,15 +4,15 @@ from openpyxl import Workbook
 def get_json(url, page, lang_name):
     data = {'first': 'true', 'pn': page, 'kd': lang_name}
     json = requests.post(url, data).json()
-    list_con = json['content']['positionResult']['result']
+    list_con = json['content']['positionResult']
     info_list = []
     for i in list_con:
         info = []
-        info.append(i['companyShortName'])
-        info.append(i['companyName'])
-        info.append(i['salary'])
-        info.append(i['city'])
-        info.append(i['education'])
+        info.append(i['position']['companyShortName'])
+        info.append(i['position']['companyName'])
+        info.append(i['position']['salary'])
+        info.append(i['position']['city'])
+        info.append(i['position']['education'])
         info_list.append(info)
     return info_list
 
